@@ -11,3 +11,4 @@ We will reimplement the AAAI-2024 paper: **MASTER: Market-Guided Stock Transform
 ### Datasets
 - [Global Factor Data](https://jkpfactors.com)
 - [Alternative open source data](https://github.com/chenditc/investment_data)
+- [Financial News Dataset] {https://github.com/Zdong104/FNSPID_Financial_News_Dataset/blob/main/README.md}
