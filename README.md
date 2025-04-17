@@ -1,6 +1,6 @@
 # MASTER
 This is the final project of team **Money is All You Need** for Brown CSCI1470 Deep Learning in Spring 2025. 
-We will reimplement the AAAI-2024 paper: **MASTER: Market-Guided Stock Transformer for Stock Price Forecasting** by Li et al. (2024), and expand our training and analysis to a global scope. 
+We will reimplement the AAAI-2024 paper: **MASTER: Market-Guided Stock Transformer for Stock Price Forecasting** by Li et al. (2024) and predict US stock prices by training on the Global Factor Data.
 
 ## References
 ### Paper
