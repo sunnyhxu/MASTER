@@ -10,6 +10,7 @@ from master import MASTERModel
 from data_utils import create_tf_dataset
 
 def main():
+    # TODO: Change dataset to be USA
     universe = 'csi300'  # ['csi300', 'csi800', 'us']
     prefix = 'opensource'  # ['opensource', 'globalfactor']
     data_path = f'../data'
