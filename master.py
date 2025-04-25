@@ -3,6 +3,8 @@ import tensorflow as tf
 import keras
 import math
 
+from base_model import SequenceModel
+
 class PositionalEncoding(keras.layers.Layer):
     def __init__(self, d_model, max_len=100, **kwargs):
         super().__init__(**kwargs)
@@ -179,7 +181,7 @@ class TemporalAttention(keras.layers.Layer):
     def __init__(self, d_model, **kwargs):
         super().__init__(**kwargs)
         self.d_model = d_model
-        self.dense = keras.Layers.Dense(d_model, use_bias=False)
+        self.dense = keras.layers.Dense(d_model, use_bias=False)
     
     def call(self, inputs):
         h = self.dense(inputs)  # (N, T, D)
@@ -204,7 +206,7 @@ class MASTER(keras.Model):
 
         self.feature_gate = Gate(self.d_gate_input, self.d_model, beta=beta)
 
-        self.layers = tf.keras.Sequential([
+        self.master_layers = tf.keras.Sequential([
             # feature layer
             keras.layers.Dense(d_model),
             PositionalEncoding(d_model),
@@ -224,5 +226,36 @@ class MASTER(keras.Model):
         gate_input = inputs[:, -1, self.gate_input_start_index:self.gate_input_end_index]  # (N, D_gate)
         features = feature_input * tf.expand_dims(self.feature_gate(gate_input), axis=1)  # (N, T, D)
 
-        output = self.layers(features, training=training)
+        output = self.master_layers(features, training=training)
         return tf.squeeze(output, axis=-1)
+    
+class MASTERModel(SequenceModel):
+    def __init__(self, d_feat, d_model, t_num_heads, s_num_heads, gate_input_start_index, gate_input_end_index,
+                 t_dropout_rate, s_dropout_rate, beta, **kwargs):
+        super(MASTERModel, self).__init__(**kwargs)
+        self.d_model = d_model
+        self.d_feat = d_feat
+        self.gate_input_start_index = gate_input_start_index
+        self.gate_input_end_index = gate_input_end_index
+        self.t_dropout_rate = t_dropout_rate
+        self.s_dropout_rate = s_dropout_rate
+        self.t_num_heads = t_num_heads
+        self.s_num_heads = s_num_heads
+        self.beta = beta
+        
+        self.init_model()
+    
+    def init_model(self):
+        self.model = MASTER(
+            d_feat=self.d_feat,
+            d_model=self.d_model,
+            t_num_heads=self.t_num_heads,
+            s_num_heads=self.s_num_heads,
+            t_dropout_rate=self.t_dropout_rate,
+            s_dropout_rate=self.s_dropout_rate,
+            gate_input_start_index=self.gate_input_start_index,
+            gate_input_end_index=self.gate_input_end_index,
+            beta=self.beta
+        )
+        
+        super(MASTERModel, self).init_model()

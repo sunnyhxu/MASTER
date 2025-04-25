@@ -2,6 +2,15 @@
 This is the final project of team **Money is All You Need** for Brown CSCI1470 Deep Learning in Spring 2025. 
 We will reimplement the AAAI-2024 paper: **MASTER: Market-Guided Stock Transformer for Stock Price Forecasting** by Li et al. (2024) and predict US stock prices by training on the Global Factor Data.
 
+## Current Progress
+- We have implemented the paper in Tensorflow, with some minor erros in data processing to be fixed.
+- We have collected open source data in .pkl format ready to train on and relevant data from Global Factor Data.
+
+## Future works
+- We need to improve our implementation to train on existing data and we can evaluate the results. In specific, we should improve on data loading, model loading, and model saving functions.
+- We can find baseline models to run on our dataset and compare performances.
+- If time permitted, we will find a larger variety of data (e.g. different time periods, countries, or even different formats such as texts) to improve our model's performance.
+
 ## References
 ### Paper
 - [Master: Market-guided stock transformer for stock price forecasting](https://arxiv.org/pdf/2312.15235)
