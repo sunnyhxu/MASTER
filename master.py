@@ -206,7 +206,7 @@ class MASTER(keras.Model):
 
         self.feature_gate = Gate(self.d_gate_input, self.d_model, beta=beta)
 
-        self.master_layers = tf.keras.Sequential([
+        self.master_layers = keras.Sequential([
             # feature layer
             keras.layers.Dense(d_model),
             PositionalEncoding(d_model),

@@ -28,3 +28,13 @@ def drop_na(x):
     mask = ~np.isnan(x)
     filtered_x = x[mask]
     return mask, filtered_x
+
+
+# to be implemented
+
+def create_tf_dataset(data, shuffle=False):
+    pass
+
+class DailyBatchSamplerRandom:
+    def __init__(self):
+        pass
