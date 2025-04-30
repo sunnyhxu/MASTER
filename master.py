@@ -231,7 +231,7 @@ class MASTER(keras.Model):
 
         output = self.master_layers(features, training=training)
         return tf.squeeze(output, axis=-1)
-    m
+    
 class MASTERModel(SequenceModel):
     def __init__(self, d_feat, d_model, t_num_heads, s_num_heads, gate_input_start_index, gate_input_end_index,
                  t_dropout_rate, s_dropout_rate, beta, **kwargs):
