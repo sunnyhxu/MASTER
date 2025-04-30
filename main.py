@@ -13,10 +13,10 @@ def main():
     # TODO: Change dataset to be USA
     universe = 'csi300'  # ['csi300', 'csi800', 'us']
     prefix = 'opensource'  # ['opensource', 'globalfactor']
-    data_path = f'../data'
-    train_pkl_path = os.path.join(data_path, prefix, f'{universe}_dl_train.pkl')
-    valid_pkl_path = os.path.join(data_path, prefix, f'{universe}_dl_valid.pkl')
-    test_pkl_path = os.path.join(data_path, prefix, f'{universe}_dl_test.pkl')
+    data_path = 'data'
+    train_pkl_path = os.path.join(data_path, "pickle_train")
+    valid_pkl_path = os.path.join(data_path, 'pickle_validate')
+    test_pkl_path = os.path.join(data_path, 'pickle_train')
     print("Loading Data...")
     with open(train_pkl_path, 'rb') as f:
         train_data = pickle.load(f)
@@ -25,18 +25,18 @@ def main():
     with open(test_pkl_path, 'rb') as f:
         test_data = pickle.load(f)
     
-    train_dataset = create_tf_dataset(train_data, shuffle=True)
-    valid_dataset = create_tf_dataset(valid_data, shuffle=False)
-    test_dataset = create_tf_dataset(test_data, shuffle=False)
+    train_dataset = create_tf_dataset(train_data,True)
+    valid_dataset = create_tf_dataset(valid_data,True)
+    test_dataset = create_tf_dataset(test_data,True)
     print("Data Loaded.")
 
-    d_feat = 158
-    d_model = 256
+    d_feat = 11
+    d_model = 8
     t_num_heads = 4
     s_num_heads = 2
     dropout = 0.5
-    gate_input_start_index = 158
-    gate_input_end_index = 221
+    gate_input_start_index = 8
+    gate_input_end_index = 11
 
     if universe == 'csi300':
         beta = 5
@@ -70,7 +70,7 @@ def main():
         )
 
         print("Model Created. Start Training...")
-
+        model.compile()
         start_time = time.time()
         model.fit(train_dataset, valid_dataset)
         training_time = time.time() - start_time

@@ -203,7 +203,10 @@ class MASTER(keras.Model):
         self.gate_input_start_index = gate_input_start_index
         self.gate_input_end_index = gate_input_end_index
         self.d_gate_input = gate_input_end_index - gate_input_start_index
-
+        self.t_num_heads = t_num_heads
+        self.s_num_heads = s_num_heads
+        self.t_dropout_rate = t_dropout_rate
+        self.s_dropout_rate = s_dropout_rate
         self.feature_gate = Gate(self.d_gate_input, self.d_model, beta=beta)
 
         self.master_layers = keras.Sequential([
@@ -228,7 +231,7 @@ class MASTER(keras.Model):
 
         output = self.master_layers(features, training=training)
         return tf.squeeze(output, axis=-1)
-    
+    m
 class MASTERModel(SequenceModel):
     def __init__(self, d_feat, d_model, t_num_heads, s_num_heads, gate_input_start_index, gate_input_end_index,
                  t_dropout_rate, s_dropout_rate, beta, **kwargs):
