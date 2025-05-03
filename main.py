@@ -12,9 +12,6 @@ from data_utils import create_tf_dataset, features_num, model_num
 
 
 def main():
-    # TODO: Change dataset to be USA
-    universe = 'csi300'  # ['csi300', 'csi800', 'us']
-    prefix = 'opensource'  # ['opensource', 'globalfactor']
     data_path = 'data'
     train_pkl_path = os.path.join(data_path, "largepickle_train")
     valid_pkl_path = os.path.join(data_path, 'largepickle_validate')
@@ -42,10 +39,7 @@ def main():
     gate_input_start_index = 50
     gate_input_end_index = 71
 
-    if universe == 'csi300':
-        beta = 5
-    elif universe == 'csi800':
-        beta = 2
+    beta = 5
 
     n_epochs = 20
     lr = 1e-4

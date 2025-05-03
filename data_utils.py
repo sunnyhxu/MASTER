@@ -32,7 +32,6 @@ def drop_na(x):
     return mask, filtered_x
 
 
-# to be implemented
 # note that data is a list of tuples -> [ (features, returns), ...]
 def create_tf_dataset(data, shuffle=False, batch_size= 400):
 
