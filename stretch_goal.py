@@ -25,6 +25,7 @@ for ticker in tickers:
 
         time.sleep(1.1)
         
+        # Recommended method of parsing throgh data
         current_day_news = list(client.list_ticker_news(ticker, published_utc=current_day.strftime("%Y-%m-%d"), limit=100))
         sentiment_today = {
             'date': current_day.strftime("%Y-%m-%d"),
@@ -32,7 +33,6 @@ for ticker in tickers:
             'neg': 0,
             'neutral': 0
         }
-
         for item in current_day_news:
             if hasattr(item, 'insights') and item.insights:
                 for insight in item.insights:
@@ -55,6 +55,7 @@ for ticker in tickers:
 
 # plot out the very last one for a sanity check
 
+# Plotting code also from tutorial/documentation from API site
 # plt.figure(figsize=(20, 10))
 # plt.plot(df_sentiment['positive'], label='Positive', color='green')
 # plt.plot(df_sentiment['negative'], label='Negative', color='red')
