@@ -41,7 +41,7 @@ def process_data(file_path:str, list_attr:list,train_perc:float, thresh=10, time
             num = unique_ids[i]
             count = groups.get_group(num)['ret'].count()
             
-            if count[0] >= thresh:
+            if count >= thresh:
                 cutoff.append(num)
         print(f'stock cutoffs completed and selected {len(cutoff)} stocks ')
 
